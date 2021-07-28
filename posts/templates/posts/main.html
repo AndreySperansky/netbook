@@ -37,9 +37,11 @@
                         
                             <button type="submit" class="ui button like-btn{{obj.id}}">
                                 {% if profile not in obj.liked.all %}
-                                    Like
+{#                                    <i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;#}
+                                  Like
                                 {% else %}
-                                    Unlike
+{#                                   <i class="bi bi-hand-thumbs-down-fill"></i> #}
+                                  Unlike
                                 {% endif %}
                             </button>
                             <div class="ui grid">

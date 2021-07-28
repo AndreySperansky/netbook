@@ -27,11 +27,35 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'posts',
     'profiles',
+
+    #django all-auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
-LOGIN_URL = '/admin/'
+SITE_ID = 1
+
+# LOGIN_URL = '/admin/'
+LOGIN_REDIRECT_URL = '/posts'
+
+# In case I gonna use email as auth method
+###################################################################
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_UNIQUE = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+#if DEBUG:
+#    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+#####################################################################
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,9 +81,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'profiles.context_processors.profile_pic',
+                'profiles.context_processors.invatations_received_no',
+                'django.template.context_processors.request',
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
 ]
 
 WSGI_APPLICATION = 'netbook.wsgi.application'
@@ -115,7 +152,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static_project')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
