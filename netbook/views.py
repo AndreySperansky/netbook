@@ -9,5 +9,5 @@ def home_view(request):
         'user': user,
         'hello' : hello,
     }
-    return render(request, 'main/home.html', context)
+    return render(request, 'main/start.html', context)
     # return HttpResponse('Hello world')
